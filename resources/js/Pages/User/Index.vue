@@ -1,6 +1,7 @@
 <template>
-  <h1 class=" fs-1 p-5">User</h1>
-    <div class="container">
+
+    <div class="container mt-5">
+        <h1 class=" fs-1 ">User</h1>
         <table class="table">
   <thead>
     <tr>
@@ -32,16 +33,21 @@
 
 
   </tbody>
+
+  <Link :href="route('user#createPage')"  class="btn btn-primary mt-3">Create</Link>
 </table>
     </div>
 
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue3';
+
 export default {
-props:{
-    user_data:Array
-}
+    props: {
+        user_data: Array
+    },
+    components: { Link }
 }
 </script>
 

@@ -28,6 +28,7 @@ Route::get('/', function () {
 });
 
 Route::get("/index",[UserIndexController::class,'index'])->name("user#index");
+Route::get("/createPage",[UserIndexController::class,'create'])->name("user#createPage");
 
 
 

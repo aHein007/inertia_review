@@ -27,7 +27,7 @@ class UserIndexController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render("User/Create");
     }
 
     /**
