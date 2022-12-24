@@ -10,6 +10,20 @@
         </div>
     </div>
 
+    <div class="mt-5 mb-5" >
+        <div class="alert alert-danger alert-dismissible fade show" v-if="$page.props.flash.deleteMessage" role="alert">
+            <strong>{{ $page.props.flash.deleteMessage }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="mt-5 mb-5" >
+        <div class="alert alert-success alert-dismissible fade show" v-if="$page.props.flash.updateMessage" role="alert">
+            <strong>{{ $page.props.flash.updateMessage }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+
         <table class="table">
   <thead>
     <tr>
@@ -36,7 +50,9 @@
                 <Link :href="route('user#editPage',user.id)">Edit</Link>
                 <!-- this is so important -->
             </button>
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-danger" @click="deleteId(user.id)">
+                Delete
+            </button>
         </div>
       </td>
     </tr>
@@ -58,7 +74,14 @@ export default {
     props: {
         user_data: Array
     },
-    components: { Link }
+    components: { Link },
+
+
+    methods:{
+        deleteId(id){
+            this.$inertia.delete(`/delete/${id}`)
+        }
+    }
 }
 </script>
 

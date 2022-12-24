@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\UserIndex;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserIndexController extends Controller
 {
@@ -77,9 +78,13 @@ class UserIndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request,UserIndex $userIndex,$id)
     {
-        //
+       $data=$request->all();
+
+      $userIndex->where("id",$id)->update($data);
+
+      return redirect()->route('user#index')->with("update",'User Data have been Update successfully!');
     }
 
     /**
@@ -88,9 +93,10 @@ class UserIndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UserIndex $id)
     {
-        //
+        $id->delete();
+        return back()->with('delete','User Data have been delete!');
     }
 
     private function data ($request){

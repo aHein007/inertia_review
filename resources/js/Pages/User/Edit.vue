@@ -8,29 +8,29 @@
    <Link href="/index"> <i class="fa-solid fa-arrow-left-long"></i></Link>
 </div>
 
-<form action="" method="post" @submit.prevent="submit" class="w-25 m-auto mt-3">
+<form action="" method="post" @submit.prevent="submit(user_data.id)" class="w-25 m-auto mt-3">
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Name</label>
-        <input type="text" class="form-control rounded" v-model="form.name" id="formGroupExampleInput" :placeholder=" user_data.name" >
+        <input type="text" class="form-control rounded" v-model="form.name" id="formGroupExampleInput" placeholder=" " >
     </div>
     <div class="mb-3">
         <label for="formGroupExampleInput2" class="form-label">Email</label>
-        <input type="email" class="form-control rounded" v-model="form.email" id="formGroupExampleInput2" :placeholder="user_data.email">
+        <input type="email" class="form-control rounded" v-model="form.email" id="formGroupExampleInput2" placeholder="">
     </div>
 
     <div class="mb-3">
         <label for="formGroupExampleInput2" class="form-label">Phone</label>
-        <input type="text" class="form-control rounded" v-model="form.phone" id="formGroupExampleInput2" :placeholder="user_data.phone">
+        <input type="text" class="form-control rounded" v-model="form.phone" id="formGroupExampleInput2" placeholder="">
     </div>
 
     <div class="mb-3">
         <label for="formGroupExampleInput2" class="form-label">Password</label>
-        <input type="text" class="form-control rounded" v-model="form.password" id="formGroupExampleInput2" :placeholder="user_data.password">
+        <input type="text" class="form-control rounded" v-model="form.password" id="formGroupExampleInput2" placeholder="">
     </div>
 
     <div class="mb-3">
         <label for="formGroupExampleInput2" class="form-label">Address</label>
-        <input type="text" class="form-control rounded" v-model="form.address" id="formGroupExampleInput2" :placeholder="user_data.address">
+        <input type="text" class="form-control rounded" v-model="form.address" id="formGroupExampleInput2" placeholder="">
     </div>
 
     <input type="submit" class="btn btn-info float-end" value="Save">
@@ -52,18 +52,18 @@ export default {
     data(){
         return {
            form:{
-            name:"",
-            email:"",
-            phone:"",
-            password:"",
-            address:""
+            name:this.user_data.name,
+            email:this.user_data.email,
+            phone:this.user_data.phone,
+            password:this.user_data.password,
+            address:this.user_data.address
            }
         }
     },
 
     methods:{
-        submit(){
-
+        submit(id){
+            this.$inertia.put(`/edit/${id}`,this.form)
         }
     },
 

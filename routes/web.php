@@ -27,11 +27,18 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get("/index",[UserIndexController::class,'index'])->name("user#index");
-Route::get("/createPage",[UserIndexController::class,'create'])->name("user#createPage");
-Route::post("/create",[UserIndexController::class,'store'])->name("user#create");
-Route::get("/editPage/{id}",[UserIndexController::class,'edit'])->name("user#editPage");
-Route::get("/edit/{id}",[UserIndexController::class,"update"])->name("user#update");
+
+
+
+Route::controller(UserIndexController::class)->group(function(){
+    Route::get("/index",'index')->name("user#index");
+    Route::get("/createPage",'create')->name("user#createPage");
+    Route::post("/create",'store')->name("user#create");
+    Route::get("/editPage/{id}",'edit')->name("user#editPage");
+    Route::put("/edit/{id}","update")->name("user#update");
+    Route::delete("/delete/{id}","destroy")->name("user#delete");
+
+});
 
 
 Route::get('/dashboard', function () {
