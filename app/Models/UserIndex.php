@@ -12,6 +12,7 @@ class UserIndex extends Model
         'name',
         'email',
         'phone',
+        'password',
         'address',
     ];
 }

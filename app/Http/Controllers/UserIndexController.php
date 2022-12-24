@@ -16,7 +16,7 @@ class UserIndexController extends Controller
     public function index()
     {
         return Inertia::render("User/Index",[
-            'user_data'=>UserIndex::get()
+            'user_data'=>UserIndex::orderBy("id",'desc')->get()
         ]);
     }
 
@@ -38,7 +38,12 @@ class UserIndexController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+      $user_data =$this->data($request);
+
+       UserIndex::create($user_data);
+
+       return redirect()->route('user#index')->with("success",'User Data have been create successfully!');
     }
 
     /**
@@ -60,7 +65,9 @@ class UserIndexController extends Controller
      */
     public function edit($id)
     {
-        //
+        return Inertia::render("User/Edit",[
+            "user_data"=>UserIndex::where("id",$id)->first()
+        ]);
     }
 
     /**
@@ -84,5 +91,15 @@ class UserIndexController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function data ($request){
+        return [
+            "name"=>$request->name,
+            "email"=>$request->email,
+            'phone'=>$request->phone,
+            'password'=>password_hash($request->password,PASSWORD_BCRYPT),
+            'address' =>$request->address,
+        ];
     }
 }

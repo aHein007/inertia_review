@@ -29,8 +29,9 @@ Route::get('/', function () {
 
 Route::get("/index",[UserIndexController::class,'index'])->name("user#index");
 Route::get("/createPage",[UserIndexController::class,'create'])->name("user#createPage");
-
-
+Route::post("/create",[UserIndexController::class,'store'])->name("user#create");
+Route::get("/editPage/{id}",[UserIndexController::class,'edit'])->name("user#editPage");
+Route::get("/edit/{id}",[UserIndexController::class,"update"])->name("user#update");
 
 
 Route::get('/dashboard', function () {

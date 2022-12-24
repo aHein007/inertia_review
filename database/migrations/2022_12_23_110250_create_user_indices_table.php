@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('user_indices', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("email");
-            $table->text('phone');
+            $table->string("email")->mail();
+            $table->text('phone')->unique();
+            $table->string('password')->min("6");
             $table->longText("address");
             $table->timestamps();
         });

@@ -2,6 +2,14 @@
 
     <div class="container mt-5">
         <h1 class=" fs-1 ">User</h1>
+
+    <div class="mt-5 mb-5" v-if="$page.props.flash.successMessage">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ $page.props.flash.successMessage }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+
         <table class="table">
   <thead>
     <tr>
@@ -24,7 +32,10 @@
       <td>{{ user.address }}</td>
       <td>
         <div class="button-container">
-            <button class="btn btn-success mr-2">Edit</button>
+            <button class="btn btn-success mr-2">
+                <Link :href="route('user#editPage',user.id)">Edit</Link>
+                <!-- this is so important -->
+            </button>
             <button class="btn btn-danger">Delete</button>
         </div>
       </td>
