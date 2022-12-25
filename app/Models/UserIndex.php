@@ -15,4 +15,12 @@ class UserIndex extends Model
         'password',
         'address',
     ];
+
+
+    function scopesearchFilter($query,$filter){
+        $query->when($filter ?? "",function($query ,$search){
+            $query->orwhere("name","like","%".$search."%")
+                  ->orwhere("address","like","%".$search."%");
+        });
+    }
 }

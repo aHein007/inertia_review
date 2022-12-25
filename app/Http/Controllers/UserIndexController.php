@@ -14,11 +14,19 @@ class UserIndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $userSearch =UserIndex::searchFilter($request->searchData)
+                    ->orderBy("id","desc")
+                    ->paginate(3);
+
+
         return Inertia::render("User/Index",[
-            'user_data'=>UserIndex::orderBy("id",'desc')->paginate(2)
+            'user_data'=>UserIndex::get(),
+            'user_data'=>$userSearch
         ]);
+
     }
 
     /**

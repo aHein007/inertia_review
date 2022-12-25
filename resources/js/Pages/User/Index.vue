@@ -111,7 +111,7 @@ export default {
 
 
         search(){
-
+            this.$inertia.get(`/index?searchData=${this.searchData}`);//this is so important
         }
     }
 }
