@@ -17,7 +17,7 @@ class UserIndexController extends Controller
     public function index()
     {
         return Inertia::render("User/Index",[
-            'user_data'=>UserIndex::orderBy("id",'desc')->get()
+            'user_data'=>UserIndex::orderBy("id",'desc')->paginate(2)
         ]);
     }
 
@@ -78,13 +78,20 @@ class UserIndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request,UserIndex $userIndex,$id)
+    public function update(Request $request,UserIndex $userIndex,$id)
     {
-       $data=$request->all();
 
-      $userIndex->where("id",$id)->update($data);
 
-      return redirect()->route('user#index')->with("update",'User Data have been Update successfully!');
+
+
+            $data=$this->data($request);
+
+       $userIndex->where("id",$id)->update($data);
+
+       return redirect()->route('user#index')->with("update",'User Data have been Update successfully!');
+
+
+
     }
 
     /**

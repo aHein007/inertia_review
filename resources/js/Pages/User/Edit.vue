@@ -55,7 +55,7 @@ export default {
             name:this.user_data.name,
             email:this.user_data.email,
             phone:this.user_data.phone,
-            password:this.user_data.password,
+            password:"",
             address:this.user_data.address
            }
         }

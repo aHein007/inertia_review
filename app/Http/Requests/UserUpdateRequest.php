@@ -27,7 +27,7 @@ class UserUpdateRequest extends FormRequest
             "name"=>'required|min:5|max:30',
             "email"=>'required|email',
             "phone"=>"required|min:6",
-            "password"=>"nullable",
+            "password"=>'min:5|nullable',
             "address"=>"required"
         ];
     }
