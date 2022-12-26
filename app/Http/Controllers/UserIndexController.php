@@ -17,14 +17,17 @@ class UserIndexController extends Controller
     public function index(Request $request)
     {
 
-        $userSearch =UserIndex::searchFilter($request->searchData)
+        $search_user =$request->searchData;
+
+        $userSearch =UserIndex::searchFilter($search_user)//this is so important
                     ->orderBy("id","desc")
                     ->paginate(3);
 
 
         return Inertia::render("User/Index",[
             'user_data'=>UserIndex::get(),
-            'user_data'=>$userSearch
+            'user_data'=>$userSearch,
+            'search_user'=>$search_user
         ]);
 
     }
@@ -47,6 +50,15 @@ class UserIndexController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $request->validate([
+            'name'=>["required","min:5"],
+            'email'=>["required","email"],
+            'phone'=>["required","integer"],
+            'password'=>["required",'min:5'],
+            'address'=>["required"]
+        ]);
 
       $user_data =$this->data($request);
 
@@ -89,7 +101,13 @@ class UserIndexController extends Controller
     public function update(Request $request,UserIndex $userIndex,$id)
     {
 
-
+        $request->validate([
+            'name'=>["required","min:5"],
+            'email'=>["required","email"],
+            'phone'=>["required","integer"],
+            'password'=>["nullable"],
+            'address'=>["required"]
+        ]);
 
 
             $data=$this->data($request);

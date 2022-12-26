@@ -28,7 +28,7 @@
 
 
     <div class="input-group mb-3 w-25 float-end">
-            <input type="text" class="form-control rounded-l" placeholder="" v-model="searchData" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="text" class="form-control rounded-l" :placeholder="search_user == null ?'': search_user+'....'" v-model="searchData" aria-label="Recipient's username" aria-describedby="button-addon2">
             <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="search">Search</button>
         </div>
 
@@ -92,7 +92,9 @@ import { Link } from '@inertiajs/inertia-vue3';
 
 export default {
     props: {
-        user_data: Object
+        user_data: Object,
+        search_user:String
+
     },
     components: { Link },
 
